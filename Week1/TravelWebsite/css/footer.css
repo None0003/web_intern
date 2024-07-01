@@ -1,0 +1,60 @@
+.footer {
+    height: 447px;
+    margin-bottom: 0px;
+    background-color: #295943;
+    position: relative;
+    color: #ffffff;
+    .content-box {
+        position: absolute;
+        height: 347px;
+        top: 41px;
+        left: 50px;
+        right: 50.33px;
+        .description-box {
+            display: flex;
+            align-items: center;
+            .main-box {
+                .main-col-name {
+                    font-size: 33.18px;
+                    width: 168px;
+                    height: 60px;
+                    top: 41px;
+                    left: 50px;
+                    gap: 0px;
+                    padding: 10px;
+                }
+                .main-desc {
+                    font-size: 16px;
+                    width: 301px;
+                    height: 188px;
+                    top: 2226px;
+                    left: 50px;
+                    gap: 0px;
+                    padding: 10px;
+                }
+            }
+            .links-box {
+                margin-left: 78.41px;
+                width: 128px;
+            }
+            .services-box {
+                margin-left: 70.69px;
+                width: 181px;
+            }
+            .contacts-box {
+                margin-left: 98.57px;
+                width: 322px;
+            }
+        }
+        .social-box {
+            margin-top: 20px;
+            padding: 5px 10px 5px 10px;
+            .name {
+                font-size: 19.2px;
+            }
+            .social-icons {
+                font-size: 24px;
+            }
+        }
+    }
+}
