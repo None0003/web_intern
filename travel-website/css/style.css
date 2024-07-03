@@ -1,0 +1,100 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Poppins;
+}
+
+.nav-bar {
+    .brand a {
+        text-decoration: none;
+        color: #295943;
+    }
+    .brand {
+        font-size: 33.18px;
+        margin-left: 50px;
+    }
+    .menus {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        text-decoration: none;
+        .menu-box {
+            padding: 10px;
+        }
+        .menu-box-current a{
+            padding: 10px;
+            color: #43b97f;
+        }
+    }
+    .menus a {
+        text-decoration: none;
+        color: black;
+        font-size: 16px;
+    }
+    .language {
+        display: flex;
+        width: 71px;
+        height: 29px;
+        text-align: center;
+        .group-1 {
+
+        }
+        .description {
+            width: 17px;
+            height: 29px;
+        }
+        .group-2 {
+            width: 16px;
+            height: 16px;
+        }
+    }
+}
+
+.banner {
+    background-position: center 60%;
+    height: 250px;
+    background-size: cover;
+}
+.banner::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 2;
+}
+.banner-title {
+    font-size: 33.18px;
+    color: #ffffff;
+    top: 160px;
+    left: 50px;
+    z-index: 3;
+}
+
+.form-label:after {
+    content:" *";
+    color: red;
+}
+
+.footer {
+    background-color: #295943;
+    color: white;
+}
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+li {
+    padding: .25rem 0px .25rem 0px;
+}
+.desc {
+    font-size: 16px;
+}
+.desc a {
+    text-decoration: none;
+    color: #FFFFFF;
+}
