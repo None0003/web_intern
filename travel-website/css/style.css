@@ -37,20 +37,7 @@ body {
     }
     .language {
         display: flex;
-        width: 71px;
-        height: 29px;
         text-align: center;
-        .group-1 {
-
-        }
-        .description {
-            width: 17px;
-            height: 29px;
-        }
-        .group-2 {
-            width: 16px;
-            height: 16px;
-        }
     }
 }
 

@@ -1,3 +1,49 @@
 .banner {
     background: url("../img/news-img/news-banner.png") no-repeat;
 }
+
+.letter {
+    .main-letter {
+        font-size: 27.65px;
+    }
+    .sub-letter {
+        font-size: 16px;
+    }
+}
+.menu a {
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+}
+.menu-title {
+    color: black;
+}
+.menu-title-current {
+    color: white;
+    background-color: #43B97F;
+    border-radius: 5px;
+}
+.card-img-top {
+    border-radius: 10px;
+}
+.card-body {
+    padding-left: unset;
+    .card-title {
+        font-size: 19.2px;
+    }
+    .card-title a {
+        text-decoration: none;
+        color: black;
+    }
+    .card-price {
+        font-size: 16px;
+        color: #295943;
+        font-weight: bold;
+    }
+    .navi-icon {
+        font-size: 24px;
+    }
+    .time-spend {
+        font-size: 16px;
+    }
+}

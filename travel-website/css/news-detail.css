@@ -1,3 +1,51 @@
 .banner {
-    background: url("../img/news-img/news-bg.png") no-repeat;
+    background: url("../img/news-detail-img/news-detail-banner.png") no-repeat;
+}
+.upload-date {
+    font-size: 18px;
+}
+
+.img-big {
+    background-image: url(../img/news-detail-img/img-1.png);
+    background-position: center 60%;
+    height: 299px;
+    background-size: cover;
+}
+.img-small-1 {
+    background-image: url(../img/news-detail-img/img-2.png);
+    background-position: center 60%;
+    height: 283px;
+    background-size: cover;
+}
+.img-small-2 {
+    background-image: url(../img/news-detail-img/img-3.png);
+    background-position: center 60%;
+    height: 283px;
+    background-size: cover;
+}
+
+.extent-btn a {
+    text-decoration: none;
+    color: #43B97F;
+}
+.card {
+    background-image: url(../img/news-detail-img/news-destination-img.png);
+    background-position: center 60%;
+    height: 255px;
+    background-size: cover;
+}
+.card::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 2;
+}
+.card-img-overlay {
+    z-index: 3;
+}
+.view-more {
+    background-color: #43B97F;
+    font-size: 16px;
 }

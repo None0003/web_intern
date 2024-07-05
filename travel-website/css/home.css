@@ -42,20 +42,7 @@
     }
     .language {
         display: flex;
-        width: 71px;
-        height: 29px;
         text-align: center;
-        .group-1 {
-
-        }
-        .description {
-            width: 17px;
-            height: 29px;
-        }
-        .group-2 {
-            width: 16px;
-            height: 16px;
-        }
     }
 }
 .hero-content {
@@ -75,7 +62,7 @@
         .find-button {
             font-size: 16px;
             background-color: #43B97F;
-            .material-icons {
+            .search-icon {
                 font-size: 24px;
             }
         }
@@ -130,6 +117,31 @@
     background-color: #43B97F;
     color: white;
 }
-.card-img-top {
+.card {
     border-radius: 10px;
+    .card-img-top {
+        border-radius: 10px;
+    }
+    .card-body {
+        padding-left: unset;
+        .card-title {
+            font-size: 19.2px;
+        }
+        .card-title a {
+            text-decoration: none;
+            color: black;
+        }
+        .card-price {
+            font-size: 16px;
+            color: #295943;
+            font-weight: bold;
+        }
+        .navi-icon {
+            font-size: 24px;
+        }
+        .time-spend {
+            font-size: 16px;
+        }
+    }
 }
+
