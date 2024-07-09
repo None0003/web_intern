@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        
+        <div id="app">
+            <input v-model="form.a" type="number" class="form-control" name="a" id="a" placeholder="a">
+            <input v-model="form.b" type="number" step="any" class="form-control" name="b" id="b" placeholder="b">
+            <input :value="calc" type="number" step="any" class="form-control" name="x" id="x" placeholder="x">
+            <br>
+            x: {{ x }}
+        </div>
+
+        <script>
+            new Vue({
+                el: "#app",
+                data() {
+                  return {
+                    form: {
+                      a: 0,
+                      b: 0,
+                      x: 0
+                    }
+                  }
+                },
+                computed: {
+                  calc: function() {
+                    let result = - this.form.b / this.form.a;
+                    this.x = result;
+                    
+                    return result;
+                  }
+                }
+            })
+        </script>
+    </body>
+</html>
