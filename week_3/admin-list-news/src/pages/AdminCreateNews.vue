@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import { ref } from 'vue';
 import SideBarComponent from '@/components/SideBarComponent.vue';
 import ProfileBarComponent from '@/components/ProfileBarComponent.vue';
 import EditorComponent from '@/components/EditorComponent.vue';
@@ -31,7 +32,24 @@ export default {
         SideBarComponent,
         ProfileBarComponent,
         EditorComponent,
-    }
+    },
+    setup() {
+        const posts = ref([]);
+        const showAddPostForm = ref(false);
+
+        const addPost = (newPost) => {
+        posts.value.push({
+            ...newPost,
+        });
+            showAddPostForm.value = false; // Ẩn form sau khi thêm bài viết
+        };
+
+        return {
+            posts,
+            showAddPostForm,
+            addPost,
+        };
+    },
 }
 </script>
 

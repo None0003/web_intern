@@ -11,27 +11,37 @@
 </template>
   
 <script>
-    export default {
-        props: {
-            visible: {
-                type: Boolean,
-                default: false
-            },
-            message: {
-                type: String,
-                default: 'Are you sure to delete this information?'
-            }
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+    props: {
+        visible: {
+            type: Boolean,
+            default: false
         },
-        methods: {
-            confirm() {
-                this.$emit('confirm');
-            },
-            cancel() {
-                this.$emit('cancel');
-            }
+        message: {
+            type: String,
+            default: 'Are you sure to delete this information?'
         }
-    };
+    },
+    setup(props, { emit }) {
+        const confirm = () => {
+            emit('confirm');
+        };
+
+        const cancel = () => {
+            emit('cancel');
+        };
+
+        return {
+            confirm,
+            cancel
+        };
+    }
+});
 </script>
+
+
   
 <style scoped>
     .confirm-dialog-overlay {

@@ -44,41 +44,16 @@
             </div>
         </div>
 
-        <!-- <div class="row py-2 d-flex align-items-center bg-white content-box">
-            <input class="col-md-1 d-flex justify-content-center mx-2 p-2 label-checkbox" type="checkbox" id="checkbox" v-model="isCheckedAny" @change="syncCheckAllboxes">
-            <div class="col-md-1 img"><img src="" alt="Ảnh bài viết"></div>
-            <div class="col-md-4 title">Title</div>
-            <div class="col-md-2 create-date">Create At</div>
-            <div class="col-md-2 status">Status</div>
-            <div class="col-md-1">
-                <button @click="goToEdit" type="button" class="btn btn-light" data-mdb-ripple-init data-mdb-ripple-color="dark"><i class='bx bx-pencil' ></i></button>
-                <button type="button" class="btn btn-light ms-3" data-mdb-ripple-init data-mdb-ripple-color="dark"><i class='bx bx-trash' ></i></button>
-            </div>        
-            <ul class="row py-2 d-flex align-items-center bg-white content-box news-list">
-                <li class="d-flex align-items-center" v-for="post in posts" :key="post.id">
-                    <input class="col-md-1 d-flex justify-content-center mx-2 p-2 label-checkbox" type="checkbox" id="checkbox" v-model="isCheckedAny" @change="syncCheckAllboxes">
-                    <div class="col-md-1 img"><img :src="post.image" alt="Ảnh bài viết"></div>
-                    <div class="col-md-4 title">{{ post.title }}</div>
-                    <div class="col-md-2 create-date">{{ formatDate(post.created_at) }}</div>
-                    <div class="col-md-2 status">{{ post.status }}</div>
-                    <div class="col-md-1">
-                        <button @click="goToEdit" type="button" class="btn btn-light" data-mdb-ripple-init data-mdb-ripple-color="dark"><i class='bx bx-pencil' ></i></button>
-                        <button type="button" class="btn btn-light ms-3" data-mdb-ripple-init data-mdb-ripple-color="dark"><i class='bx bx-trash' ></i></button>
-                    </div>
-                </li>
-            </ul>
-        </div> -->
-
         <ul class="news-list">
             <li class="row py-2 d-flex align-items-center bg-white content-box" v-for="post in posts" :key="post.id">
                 <input class="col-md-1 d-flex justify-content-center mx-2 p-2 label-checkbox" type="checkbox" id="checkbox" v-model="isCheckedAny" @change="syncCheckAllboxes">
                 <div class="col-md-1 img"><img :src="post.image" alt="Ảnh bài viết"></div>
                 <div class="col-md-4 title">{{ post.title }}</div>
-                <div class="col-md-2 create-date">{{ formatDate(post.created_at) }}</div>
+                <div class="col-md-2 create-date">{{ formatDate(post.createdDate) }}</div>
                 <div class="col-md-2 status">{{ post.status }}</div>
                 <div class="col-md-1 d-flex">
-                    <button @click="goToEdit(post.id)" type="button" class="btn btn-light" data-mdb-ripple-init data-mdb-ripple-color="dark"><i class='bx bx-pencil' ></i></button>
-                    <button @click="showConfirmDialog(post.id)" type="button" class="btn btn-light ms-3" data-mdb-ripple-init data-mdb-ripple-color="dark"><i class='bx bx-trash' ></i></button>
+                    <button @click="goToEdit(post.slug)" type="button" class="btn btn-light" data-mdb-ripple-init data-mdb-ripple-color="dark"><i class='bx bx-pencil' ></i></button>
+                    <button @click="showConfirmDialog(post.slug)" type="button" class="btn btn-light ms-3" data-mdb-ripple-init data-mdb-ripple-color="dark"><i class='bx bx-trash' ></i></button>
                 </div>
             </li>
         </ul>
@@ -107,119 +82,151 @@
 </template>
   
 <script>
-    import axios from 'axios';
+    import { ref, onMounted, watch } from 'vue';
+    import { useRouter } from 'vue-router';
     import ConfirmDialog from './ConfirmDialog.vue';
-    
+
     export default {
         components: {
             ConfirmDialog,
         },
-        data() {
-            return {
-                posts: [],
-                currentPage: 1,
-                totalPages: 1,
-                showFilterMenu: false,
-                showManageMenu: false,
-                isCheckedAll: false,
-                isCheckedAny: false,
-                total: 0,
-                isConfirmDialogVisible: false,
-                itemIdToDelete: null
-            };
-        },
-        mounted() {
-            this.getPosts();
-        },
-        methods: {
-            async getPosts() {
-                try {
-                    const response = await axios.get(`https://your-api-url/posts?page=${this.currentPage}&per_page=5`);
-                    this.posts = response.data.posts; // Giả sử API trả về một object có key `posts` chứa danh sách bài viết
-                    this.totalPages = response.data.meta.total_pages;
-                } catch (error) {
-                    console.error('Error fetching posts:', error);
-                }
+        setup() {
+            const posts = ref([]);
+            const currentPage = ref(1);
+            const totalPages = ref(1);
+            const showFilterMenu = ref(false);
+            const showManageMenu = ref(false);
+            const isCheckedAll = ref(false);
+            const isCheckedAny = ref(false);
+            const total = ref(0);
+            const isConfirmDialogVisible = ref(false);
+            const itemSlugToDelete = ref(null);
+            const router = useRouter();
+
+            const getPosts = async () => {
+                // try {
+                //     const response = await axios.get(`https://your-api-url/posts?page=${currentPage.value}&per_page=5`);
+                //     posts.value = response.data.posts; // Giả sử API trả về một object có key `posts` chứa danh sách bài viết
+                //     totalPages.value = response.data.meta.total_pages;
+                // } catch (error) {
+                //     console.error('Error fetching posts:', error);
+                // }
+
+
                 const newItem = {
-                    id: 0,
                     img: 0,
                     title: "Title",
-                    created_at: "Create At",
-                    Status: "Draft"
-                }
-                this.posts.push(newItem);
-            },
-            formatDate(dateString) {
+                    slug: "title-to-slug",
+                    createdDate: "",
+                    selectedStatus: ["Published", "Draft"],
+                    selectedCategory: "Beach",
+                    content: "This is what you see"
+                };
+                posts.value.push(newItem);
+
+                
+            };
+
+            const formatDate = (dateString) => {
                 return new Date(dateString).toLocaleDateString('en-US');
-            },
-            nextPage() {
-                if (this.currentPage < this.totalPages) {
-                this.currentPage++;
-                this.getPosts();
+            };
+
+            const nextPage = () => {
+                if (currentPage.value < totalPages.value) {
+                    currentPage.value++;
+                    getPosts();
                 }
-            },
-            prevPage() {
-                if (this.currentPage > 1) {
-                this.currentPage--;
-                this.getPosts();
+            };
+
+            const prevPage = () => {
+                if (currentPage.value > 1) {
+                    currentPage.value--;
+                    getPosts();
                 }
-            },
-            toggleFilterMenu() {
-                this.showFilterMenu = !this.showFilterMenu;
-            },
-            toggleManageMenu() {
-                if (this.total === 0) {
-                    this.showManageMenu = false;
-                } else {
-                    this.showManageMenu = true;
-                }
-            },
-            syncCheckAllboxes() {
-                if (this.isCheckedAny) {
-                    this.isCheckedAll = true;
-                }
-                if (!this.isCheckedAny) {
-                    this.isCheckedAll = false;
-                }
-            },
-            syncCheckAnyboxes() {
-                if (this.isCheckedAll) {
-                    this.isCheckedAny = true;
-                }
-                if (!this.isCheckedAll) {
-                    this.isCheckedAny = false;
-                }
-            },
-            goToCreate() {
-                this.$router.push('create-news');
-            },
-            goToEdit(id) {
-                this.$router.push(`/edit-news/${id}`);
-            }, 
-            removeNews(id) {
-                this.posts = this.posts.filter(post => post.id !== id);
-            },
-            showConfirmDialog(id) {
-                this.itemIdToDelete = id;
-                this.isConfirmDialogVisible = true;
-            },
-            handleConfirm() {
-                this.removeNews(this.itemIdToDelete);
-                this.isConfirmDialogVisible = false;
-                this.itemIdToDelete = null;
-            },
-            handleCancel() {
-                this.isConfirmDialogVisible = false;
-                this.itemIdToDelete = null;
-            },
-        },
-        watch: {
-            isChecked2(newVal) {
-                this.isChecked1 = newVal ? true : this.isChecked1;
-            }
+            };
+
+            const toggleFilterMenu = () => {
+                showFilterMenu.value = !showFilterMenu.value;
+            };
+
+            const toggleManageMenu = () => {
+                showManageMenu.value = total.value !== 0;
+            };
+
+            const syncCheckAllboxes = () => {
+                isCheckedAll.value = isCheckedAny.value;
+            };
+
+            const syncCheckAnyboxes = () => {
+                isCheckedAny.value = isCheckedAll.value;
+            };
+
+            const goToCreate = () => {
+                router.push('create-news');
+            };
+
+            const goToEdit = (slug) => {
+                router.push(`/edit-news/${slug}`);
+            };
+
+            const removeNews = (slug) => {
+                posts.value = posts.value.filter(post => post.slug !== slug);
+            };
+
+            const showConfirmDialog = (slug) => {
+                itemSlugToDelete.value = slug;
+                isConfirmDialogVisible.value = true;
+            };
+
+            const handleConfirm = () => {
+                removeNews(itemSlugToDelete.value);
+                isConfirmDialogVisible.value = false;
+                itemSlugToDelete.value = null;
+            };
+
+            const handleCancel = () => {
+                isConfirmDialogVisible.value = false;
+                itemSlugToDelete.value = null;
+            };
+
+            onMounted(() => {
+                getPosts();
+            });
+
+            watch(isCheckedAny, (newVal) => {
+                isCheckedAll.value = newVal ? true : isCheckedAll.value;
+            });
+
+            return {
+                posts,
+                currentPage,
+                totalPages,
+                showFilterMenu,
+                showManageMenu,
+                isCheckedAll,
+                isCheckedAny,
+                total,
+                isConfirmDialogVisible,
+                itemSlugToDelete,
+                getPosts,
+                formatDate,
+                nextPage,
+                prevPage,
+                toggleFilterMenu,
+                toggleManageMenu,
+                syncCheckAllboxes,
+                syncCheckAnyboxes,
+                goToCreate,
+                goToEdit,
+                removeNews,
+                showConfirmDialog,
+                handleConfirm,
+                handleCancel
+            };
         }
     };
 </script>
+
   
 <style scoped>
     .news-management-title {

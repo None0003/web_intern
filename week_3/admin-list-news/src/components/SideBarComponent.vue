@@ -16,21 +16,35 @@
 </template>
 
 <script>
-    export default {
-        name: "SideBarComponent",
-        methods: {
-            goToTours() {
-                this.$router.push('admin-list-tours');
-            },
-            goToNews() {
-                this.$router.push('../admin-list-news');
-            },
-            goToBookings() {
-                this.$router.push('admin-list-bookings');
-            }
-        }
+import { useRouter } from 'vue-router';
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+    name: "SideBarComponent",
+    setup() {
+        const router = useRouter();
+
+        const goToTours = () => {
+            router.push('admin-list-tours');
+        };
+
+        const goToNews = () => {
+            router.push('../admin-list-news');
+        };
+
+        const goToBookings = () => {
+            router.push('admin-list-bookings');
+        };
+
+        return {
+            goToTours,
+            goToNews,
+            goToBookings
+        };
     }
+});
 </script>
+
 
 <style scoped>
     .title-logo a {

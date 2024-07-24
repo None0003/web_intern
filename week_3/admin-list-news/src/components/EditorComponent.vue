@@ -47,6 +47,7 @@
             <p>Title: {{ formData.title }}</p>
             <p>Slug: {{ formData.slug }}</p>
             <p>Content: {{ formData.content }}</p>
+            <p>Create date: {{  formData.createDate }}</p>
             <p>Selected Category: {{ formData.selectedCategory }}</p>
             <p>Selected Status: {{ formData.selectedStatus }}</p>
         </div>
@@ -54,57 +55,88 @@
 </template>
 
 <script>
-    export default {
-        name: "CreateNewsComponent",
-        data() {
-            return {
-            formData: {
-                title: '',
-                slug: '',
-                content: '',
-                selectedCategory: '',
-                selectedStatus: 'Published',
-                imageFile: null,
-            },
-            options: ['Adventure Travel', 'Beach', 'Explore World', 'Family Holiday', 'Art and culture'],
-            status: ['Published', 'Unpublished'],
-            imagePreview: null,
-            submitted: false
-            };
-        },
-        methods: {
-            handleFileUpload(event) {
-                const file = event.target.files[0];
-                this.formData.imageFile = file;
+import { ref } from 'vue';
 
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = (e) => {
-                    this.imagePreview = e.target.result;
-                    };
-                    reader.readAsDataURL(file);
-                }
-            },
-            handleCancel() {
-                console.log('Cancel button clicked');
-            },
-            handleDraft() {
-                console.log('Draft button clicked');
-            },
-            handleSave() {
-                console.log('Save button clicked');
-            },
-            handleSubmit() {
-                this.submitted = true;
-                console.log('Form submitted:', this.formData);
-            },
-            updateSlugPlaceholder(event) {
-                const newTitle = event.target.value;
-                this.slugPlaceholder = newTitle.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
-            },
-        },
+export default {
+    name: "EditorComponent",
+    setup() {
+
+        const formData = ref({
+            title: '',
+            slug: '',
+            content: '',
+            createDate: '',
+            selectedCategory: '',
+            selectedStatus: '',
+            imageFile: null,
+        });
+
+        const options = ref(['Adventure Travel', 'Beach', 'Explore World', 'Family Holiday', 'Art and culture']);
+        const status = ref(['Published', 'Unpublished']);
+        const imagePreview = ref(null);
+        const submitted = ref(false);
+        const slugPlaceholder = ref('');
+
+        const getCurrentDate = () => {
+            const now = new Date();
+            return now.toLocaleDateString();
+        };
+
+        const handleFileUpload = (event) => {
+            const file = event.target.files[0];
+            formData.value.imageFile = file;
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    imagePreview.value = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        };
+
+        const handleCancel = () => {
+            console.log('Cancel button clicked');
+        };
+
+        const handleDraft = () => {
+            console.log('Draft button clicked');
+        };
+
+        const handleSave = () => {
+            console.log('Save button clicked');
+        };
+
+        const handleSubmit = () => {
+            submitted.value = true;
+            formData.value.createDate = getCurrentDate();
+            console.log('Form submitted:', formData.value);
+        };
+
+        const updateSlugPlaceholder = (event) => {
+            const newTitle = event.target.value;
+            slugPlaceholder.value = newTitle.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+        };
+
+        return {
+            formData,
+            options,
+            status,
+            imagePreview,
+            submitted,
+            slugPlaceholder,
+            getCurrentDate,
+            handleFileUpload,
+            handleCancel,
+            handleDraft,
+            handleSave,
+            handleSubmit,
+            updateSlugPlaceholder
+        };
     }
+};
 </script>
+
 
 <style scoped>
     .tool-box {

@@ -12,7 +12,9 @@
                     <div class="my-5 news-edit-title">
                         <strong>Edit News</strong>
                     </div>
-                    <EditorComponent />
+                    <EditorComponent 
+                        :onSubmit="editNews"
+                    />
                 </div>
             </div>
         </div>
@@ -26,11 +28,16 @@ import ProfileBarComponent from '@/components/ProfileBarComponent.vue';
 import EditorComponent from '@/components/EditorComponent.vue';
 
 export default {
-    name: "AdminCreateNews",
+    name: "AdminEditNews",
     components: {
         SideBarComponent,
         ProfileBarComponent,
         EditorComponent,
+    },
+    methods: {
+        editNews(news) {
+            console.log("Edited!", news)
+        }
     }
 }
 </script>
