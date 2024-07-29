@@ -8,11 +8,11 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
+$username = $user->getUsername();
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['logout'])) {
     $user->logout();
 }
-
-$username = $user->getUsername();
 ?>
 
 <!DOCTYPE html>
@@ -23,8 +23,7 @@ $username = $user->getUsername();
     <title>Profile Page</title>
 </head>
 <body>
-    <h2>Profile</h2>
-    <p>Welcome, <?php echo htmlspecialchars($username); ?>!</p>
+    <h2>Welcome, <?php echo htmlspecialchars($username); ?>!</h2>
     <form action="" method="post">
         <button type="submit" name="logout">Logout</button>
     </form>
