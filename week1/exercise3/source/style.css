@@ -1,0 +1,10 @@
+body {
+    min-height: 90vh;
+}
+
+.box {
+    margin-top: 5vh;
+    border-radius: 1em;
+    background-color: powderblue;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+}

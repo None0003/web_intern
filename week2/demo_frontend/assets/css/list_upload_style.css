@@ -1,0 +1,86 @@
+header {
+    background-color: #DBDBDB;
+}
+
+.logo-img {
+    filter: grayscale(100%);
+    max-width: 80px;
+}
+
+.icon-btn {
+    /* background-color: #C5C5C5; */
+    background-color: white;
+    border: 1px solid #D5D5D5;
+}
+
+.icon-btn:hover {
+    color: white;
+}
+
+.upload-box {
+    height: 30vh;
+    border: 5px dashed #DBDBDB;
+    background-color: #F5F5F5;
+    .upload-btn {
+        background-color: #155ED1;
+        .upload-icon {
+            fill: white;
+        }
+    }
+}
+
+.caution {
+    background-color: #F5F5F5;
+}
+
+.case-menu {
+    .nav {
+        background-color: #B7B7B6;   
+    }
+    .nav-link {
+        border-radius: 0;
+        color: black;
+    }
+    .nav-link.active {
+        background-color: #DBDBDB;
+    }
+}
+
+.tab-content {
+    .case-manager {
+        background-color: #DBDBDB;
+    }
+    .page-manager {
+        border-bottom: 1px solid #C4C4C4;     
+        .page-btn {
+            background-color: white;
+            font-size: 10px;
+            border: 1px solid #D5D5D5;
+        }
+    }
+}
+
+.case-list-container {
+    display: flex;
+    flex-direction: column;
+    height: calc(52vh - 150px);
+    .case-table th {
+        background-color: #DBDBDB;
+    }
+    .table-fixed {
+        table-layout: fixed; 
+        width: 100%;
+    }
+    .table thead {
+        /* position: sticky; */
+        top: 0;
+        background: white;
+        z-index: 10;
+    }
+}
+
+
+
+
+
+

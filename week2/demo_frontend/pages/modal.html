@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link href='../assets/css/modal_style.css' rel='stylesheet'>
+    <title>Phần mềm chẩn đoán hình ảnh</title>
+</head>
+<body>
+    <div class="d-flex flex-column vh-100">
+        <header class="d-flex align-items-center position-relative">
+            <div class="col-md-3 py-3 ps-3 d-flex">
+                <div class="col-md-2"><img src="..\assets\img\logo-minerva-cut.png" class="img-fluid logo-img" alt=""></div>
+                <div class="col-md-9 fs-6 ms-1 d-flex align-items-center logo-name"><strong>PHẦN MỀM CHẨN ĐOÁN HÌNH ẢNH</strong></div>
+            </div>
+            <div class="col-xl-4"></div>
+            <div class="col-xl-1"></div>
+            <div class="col-xl-2">
+                <div class="btn-group me-1 collection">
+                    <button class="btn icon-btn rounded-start"><box-icon type='solid' name='folder-open'></box-icon></button>
+                    <button class="btn icon-btn rounded-end"><box-icon type='solid' name='collection'></box-icon></button>
+                </div>
+                <div class="btn-group me-1 view">
+                    <button class="btn icon-btn rounded-start"><box-icon type='solid' name='folder-open'></box-icon></button>
+                    <button class="btn icon-btn rounded-end"><box-icon type='solid' name='collection'></box-icon></button>
+                </div>
+                <div class="btn-group me-1 chart">
+                    <button class="btn icon-btn rounded"><box-icon type='solid' name='folder-open'></box-icon></button>
+                </div>
+            </div>
+            <div class="col-xl-2">
+                <div class="dropdown">
+                    <button class="btn fs-6 d-flex align-items-center dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <box-icon type='solid' name='user-circle' class="me-2"></box-icon>
+                        Bs. Nguyễn Mạnh Hà
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Tài khoản</a></li>
+                        <li>
+                            <button type="button" class="ms-1 btn" data-bs-toggle="modal" data-bs-target="#exampleModal">Cấu hình người dùng</button>
+                        </li>
+                        <li><a class="dropdown-item" href="#">Đăng xuất</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+
+        <div class="d-flex flex-grow-1 overflow-hidden">
+            <div class="col-2 d-flex flex-column profile-list-container">
+                <div class="px-4 py-2 description">
+                    <div class="d-flex align-items-center fs-6"><strong>Cấu hình</strong></div>
+                </div>
+                <div class="content flex-grow-1 overflow-auto">
+                    <table class="table table-striped flex-grow-1">
+                        <tbody>
+                            <tr class="folder-row" data-bs-toggle="collapse" data-bs-target="#subfolder-1">
+                                <td><i class="bi ms-3 bi-caret-right-fill toggle-direction-icon"></i><i class="bi m-2 bi-folder2 toggle-folder-icon"></i>Tên Filter</td>
+                                <td><i class="bi ms-3 bi-caret-right-fill toggle-direction-icon"></i><i class="bi m-2 bi-folder2 toggle-folder-icon"></i>Tên Filter</td>
+                            </tr>
+                            <tr id="subfolder-1" class="collapse">
+                                <td class="ps-5"><i class="bi ms-4 me-2 bi-folder2-open"></i>Tên Filter</td>
+                            </tr>
+                            <tr class="folder-row" data-bs-toggle="collapse" data-bs-target="#subfolder-2">
+                                <td><i class="bi ms-3 bi-caret-right-fill toggle-direction-icon"></i><i class="bi m-2 bi-folder2 toggle-folder-icon"></i>Tên Filter</td>
+                            </tr>
+                            <tr id="subfolder-2" class="collapse">
+                                <td class="ps-5"><i class="bi ms-4 me-2 bi-folder2-open"></i>Tên Filter</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>  
+            </div>
+            <div class="col-10 d-flex flex-column user-profile">
+                <div class="px-4 py-2 description">
+                    <div class="d-flex align-items-center fs-6"><strong>Cấu hình người dùng</strong></div>
+                </div>
+                <div class="m-3 content flex-grow-1 overflow-auto"></div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered vh-100">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Cấu hình người dùng</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="d-flex flex-grow-1 overflow-hidden">
+                            <div class="col-md-3 d-flex flex-column bg-white rounded modal-profile-list-container">
+                                <div class="content rounded bg-white flex-grow-1 overflow-auto">
+                                    <table class="table table-striped flex-grow-1">
+                                        <tbody>
+                                            <tr class="folder-row" data-bs-toggle="collapse" data-bs-target="#subfolder-3">
+                                                <td><i class="bi ms-3 bi-caret-right-fill toggle-direction-icon"></i><i class="bi m-2 bi-folder2 toggle-folder-icon"></i>Danh mục</td>
+                                            </tr>
+                                            <tr id="subfolder-3" class="collapse">
+                                                <td class="ps-5"><i class="bi ms-4 me-2 bi-folder2-open"></i>Tên Filter</td>
+                                            </tr>
+                                            <tr class="folder-row" data-bs-toggle="collapse" data-bs-target="#subfolder-4">
+                                                <td><i class="bi ms-3 bi-caret-right-fill toggle-direction-icon"></i><i class="bi m-2 bi-folder2 toggle-folder-icon"></i>Danh mục</td>
+                                            </tr>
+                                            <tr id="subfolder-4" class="collapse">
+                                                <td class="ps-5"><i class="bi ms-4 me-2 bi-folder2-open"></i>Tên Filter</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>  
+                            </div>
+                            <div class="col-md-9 rounded d-flex flex-column modal-user-profile">
+                                <div class="ms-2 bg-white rounded flex-grow-1 overflow-auto">
+                                    <div class="m-3 user-profile-title">
+                                        Thông báo
+                                        <div class="col-md-5">
+                                            <select class="my-2 form-select" aria-label="Default select example">
+                                                <option selected>Value</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="mx-3 my-4 user-profile-body">
+                                        Chia đôi màn hình
+                                    </div>
+                                    <div class="mx-3 mb-5 d-flex rate-menu">
+                                        <!-- <div class="col-md-3 me-5">
+                                            <button class="btn">
+                                                <img src="..\assets\img\6040.png" alt="Button Icon" width="225" height="150"> 
+                                            </button>                                            
+                                        </div>                                                                                                                    
+                                        <div class="col-md-3 me-5">
+                                            <button class="btn">
+                                                <img src="..\assets\img\5050.png" alt="Button Icon" width="225" height="150"> 
+                                            </button>                                            
+                                        </div> 
+                                        <div class="col-md-3">
+                                            <button class="btn">
+                                                <img src="..\assets\img\4060.png" alt="Button Icon" width="225" height="150"> 
+                                            </button>                                            
+                                        </div>  -->
+                                        <div class="col-md-4">
+                                            <div class="m-3 d-flex rounded bg-white align-items-stretch screen">
+                                                <div class="col-md-8 d-flex">
+                                                    <div class="m-1 py-5 w-100 rounded text-center d-flex align-items-center justify-content-center screen-side">
+                                                        Danh<br>sách
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 d-flex">
+                                                    <div class="m-1 py-5 w-100 rounded text-center d-flex align-items-center justify-content-center screen-side">
+                                                        Viewer
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="describe-5050 text-center">Tỷ lệ 60:40</div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="m-3 d-flex rounded bg-white align-items-stretch screen-chosen">
+                                                <div class="col-md-6 d-flex">
+                                                    <div class="m-1 py-5 w-100 rounded text-white text-center d-flex align-items-center justify-content-center screen-side-chosen">
+                                                        Danh<br>sách
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 d-flex">
+                                                    <div class="m-1 py-5 w-100 rounded text-white text-center d-flex align-items-center justify-content-center screen-side-chosen">
+                                                        Viewer
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="describe-5050 text-center rate-chosen">Tỷ lệ 50:50</div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="m-3 d-flex rounded bg-white align-items-stretch screen">
+                                                <div class="col-md-4 d-flex">
+                                                    <div class="m-1 py-5 w-100 rounded text-center d-flex align-items-center justify-content-center screen-side">
+                                                        Danh<br>sách
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8 d-flex">
+                                                    <div class="m-1 py-5 w-100 rounded text-center d-flex align-items-center justify-content-center screen-side">
+                                                        Viewer
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="describe-5050 text-center">Tỷ lệ 40:60</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn bg-white" data-bs-dismiss="modal">Hủy bỏ</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Đồng ý</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="..\assets\js\modal.js"></script>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

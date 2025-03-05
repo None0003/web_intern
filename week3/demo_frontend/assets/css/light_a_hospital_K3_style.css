@@ -1,0 +1,109 @@
+header {
+    background-color: #DBDBDB;
+}
+
+.logo-img {
+    filter: grayscale(100%);
+    max-width: 80px;
+}
+
+.icon-btn {
+    background-color: white;
+    border: 1px solid #D5D5D5;
+}
+
+.icon-btn:hover {
+    color: white;
+}
+
+.nav-link {
+    border-radius: 0 !important;
+    border: 0 !important;
+}
+
+.menu {
+    border-right: 1px solid #B2B2B2;
+    background-color: #DBDBDB;
+    .work-tree {
+        .work-tree-title {
+            background-color: #DBDBDB;
+            border-top: 1px solid #B2B2B2;
+            border-bottom: 1px solid #B2B2B2;
+        }
+
+    }
+    .case-menu {
+        border-top: 1px solid #B2B2B2;
+        .tab-content {
+            height: 93%;
+            overflow-y: auto;
+        }
+        .tab-list {
+            background-color: #B7B7B6;
+        }
+        .nav-link.active {
+            background-color: #DBDBDB;
+        }
+        .patient-info {
+            border-bottom: 1px solid #B2B2B2;
+        }
+        .case-info {
+            border-bottom: 1px solid #B2B2B2;
+        }
+    }
+}
+
+.patient-show {
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: #DBDBDB;
+    border-top: 1px solid #B2B2B2;
+    .nav-link.active {
+        background-color: #DBDBDB;
+    }
+    .tab-list {
+        background-color: #B7B7B6;
+    }
+    .case-list-container {
+        height: 21vh;
+        overflow-y: auto;
+        .case-list th {
+            position: sticky;
+            top: 0;
+            font-weight: normal;
+            background-color: #DBDBDB;
+            border-top: 1px solid #E5E5E5;
+            border-right: 1px solid #AFAFAF;
+        }
+    }
+    .related-case-table {
+        height: 17vh;
+        overflow-y: auto;
+        .case-list th {
+            position: sticky;
+            top: 0;
+            font-weight: normal;
+            background-color: #DBDBDB;
+            border-top: 1px solid #E5E5E5;
+            border-right: 1px solid #AFAFAF;
+        }
+    }
+    .case-show {
+        .filter {
+            border-top: 1px solid #C4C4C4;
+        }
+        .note-box {
+            background-color: #F5F5F5;
+        }
+        .note {
+            background-color: #F5F5F5;
+        }
+        .choose-img {
+            border-right: 1px solid #C4C4C4;
+        }
+    }
+    .demo-img {
+        max-width: 200px;
+    }
+}
+    

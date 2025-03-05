@@ -1,0 +1,56 @@
+.logo-img {
+    max-width: 35%;
+}
+
+.logo-name {
+    color: #9E5289;
+}
+
+.login-box {
+    border-radius: 0.75em;
+    background-color: #F7F7F7;
+    border: 1px solid #DEDEDE;
+}
+
+.otp-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px; 
+}
+
+.otp-input {
+    width: min(5vh, 60px); 
+    height: min(5vh, 60px);
+    text-align: center;
+    font-size: 24px;
+    border: 2px solid #DADADA;
+    border-radius: 8px;
+    outline: none;
+    transition: all 0.2s ease-in-out;
+}
+
+.login-btn {
+    background-color: #155ED1;
+}
+
+.login-btn:hover {
+    background-color: #155ED1 !important;
+    color: white !important;
+    filter: brightness(90%);
+}
+
+.phone-number {
+    color: #565656;
+}
+
+.not-using {
+    color: #BBBBBB;
+}
+
+.separate-sign {
+    color: #BBBBBB;
+}
+
+.copyright {
+    color: #C4C4C4;
+}

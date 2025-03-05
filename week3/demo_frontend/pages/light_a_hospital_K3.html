@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link href='../assets/css/light_a_hospital_K3_style.css' rel='stylesheet'>
+    <title>Document</title>
+</head>
+<body>
+    <div class="d-flex flex-column vh-100">
+        <header class="d-flex align-items-center position-relative">
+            <div class="col-md-3 py-3 ps-3 d-flex">
+                <div class="col-md-2"><img src="..\assets\img\logo-minerva-cut.png" class="img-fluid logo-img" alt=""></div>
+                <div class="col-md-9 fs-6 ms-1 d-flex align-items-center logo-name"><strong>MINERVA PACS</strong></div>
+            </div>
+            <div class="col-xl-4"></div>
+            <div class="col-xl-2">
+                <div class="btn-group me-1 collection">
+                    <button class="btn icon-btn rounded-start"><box-icon type='solid' name='folder-open'></box-icon></button>
+                    <button class="btn icon-btn rounded-end"><box-icon type='solid' name='collection'></box-icon></button>
+                </div>
+                <div class="btn-group me-1 view">
+                    <button class="btn icon-btn rounded-start"><box-icon type='solid' name='folder-open'></box-icon></button>
+                    <button class="btn icon-btn rounded-end"><box-icon type='solid' name='collection'></box-icon></button>
+                </div>
+                <div class="btn-group me-1 chart">
+                    <button class="btn icon-btn rounded"><box-icon type='solid' name='folder-open'></box-icon></button>
+                </div>
+            </div>
+            <div class="col-xl-1">
+                <div class="dropdown">
+                    <button class="btn fs-6 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" id="masterDropdown">
+                        Master K1, K2
+                    </button>
+                    <ul class="dropdown-menu" id="masterMenu">
+                        <li><a class="dropdown-item" href="#">Master K1, K2</a></li>
+                        <li><a class="dropdown-item" href="#">Master K3, K4</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-xl-2">
+                <div class="dropdown">
+                    <button class="btn fs-6 d-flex align-items-center dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <box-icon type='solid' name='user-circle' class="me-2"></box-icon>
+                        Bs. Nguyễn Mạnh Hà
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Tài khoản</a></li>
+                        <li><a class="dropdown-item" href="#">Cấu hình người dùng</a></li>
+                        <li><a class="dropdown-item" href="#">Đăng xuất</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+
+        <div class="d-flex flex-grow-1 overflow-hidden">
+            <div class="col-md-2 menu">
+                <div class="work-tree h-50">
+                    <div class="px-4 py-2 d-flex work-tree-title">
+                        <div class="col-md-10 d-flex align-items-center fs-6"><strong>Cây làm việc</strong></div>
+                        <div class="col-md-2 left-icon text-end"><i class="bi bi-chevron-left"></i></div>
+                    </div> 
+                    <div class="tab-list">
+                        <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active text-black" id="filter-tab" data-bs-toggle="tab" data-bs-target="#filter" type="button" role="tab">
+                                    Bộ lọc
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link text-black" id="archive-tab" data-bs-toggle="tab" data-bs-target="#archive" type="button" role="tab">
+                                    Lưu trữ
+                                </button>
+                            </li>
+                        </ul>   
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="filter" role="tabpanel">
+                                <div class="content flex-grow-1 overflow-auto">
+                                    <table class="table table-striped flex-grow-1">
+                                        <tbody>
+                                            <tr class="folder-row" data-bs-toggle="collapse" data-bs-target="#subfolder-CT">
+                                                <td><i class="bi ms-3 bi-caret-right-fill toggle-direction-icon"></i><i class="bi m-2 bi-folder2 toggle-folder-icon"></i>CT</td>
+                                            </tr>
+                                            <div class="d-flex flex-column">
+                                                <tr id="subfolder-CT" class="collapse">
+                                                    <td class="ps-5">
+                                                        <i class="bi ms-4 me-2 bi-folder2-open"></i>CT-01
+                                                    </td>
+                                                </tr>
+                                                <tr id="subfolder-CT" class="collapse">
+                                                    <td class="ps-5">
+                                                        <i class="bi ms-4 me-2 bi-folder2-open"></i>CT-02
+                                                    </td>
+                                                </tr>    
+                                            </div>
+                                            <tr class="folder-row" data-bs-toggle="collapse" data-bs-target="#subfolder-MR">
+                                                <td><i class="bi ms-3 bi-caret-right-fill toggle-direction-icon"></i><i class="bi m-2 bi-folder2 toggle-folder-icon"></i>MR</td>
+                                            </tr>
+                                            <div class="d-flex flex-column">
+                                                <tr id="subfolder-MR" class="collapse">
+                                                    <td class="ps-5">
+                                                        <i class="bi ms-4 me-2 bi-folder2-open"></i>MR-01
+                                                    </td>
+                                                </tr>
+                                                <tr id="subfolder-MR" class="collapse">
+                                                    <td class="ps-5">
+                                                        <i class="bi ms-4 me-2 bi-folder2-open"></i>MR-02
+                                                    </td>
+                                                </tr>   
+                                            </div>
+                                            <tr class="folder-row" data-bs-toggle="collapse" data-bs-target="#subfolder-US">
+                                                <td><i class="bi ms-3 bi-caret-right-fill toggle-direction-icon"></i><i class="bi m-2 bi-folder2 toggle-folder-icon"></i>US</td>
+                                            </tr>
+                                            <div class="d-flex flex-column">
+                                                <tr id="subfolder-US" class="collapse">
+                                                    <td class="ps-5">
+                                                        <i class="bi ms-4 me-2 bi-folder2-open"></i>US-01
+                                                    </td>
+                                                </tr>
+                                                <tr id="subfolder-US" class="collapse">
+                                                    <td class="ps-5">
+                                                        <i class="bi ms-4 me-2 bi-folder2-open"></i>US-02
+                                                    </td>
+                                                </tr>
+                                            </div>
+                                            <tr class="folder-row" data-bs-toggle="collapse" data-bs-target="#subfolder-ED">
+                                                <td><i class="bi ms-3 bi-caret-right-fill toggle-direction-icon"></i><i class="bi m-2 bi-folder2 toggle-folder-icon"></i>ED</td>
+                                            </tr>
+                                            <div class="d-flex flex-column">
+                                                <tr id="subfolder-ED" class="collapse">
+                                                    <td class="ps-5">
+                                                        <i class="bi ms-4 me-2 bi-folder2-open"></i>ED-01
+                                                    </td>
+                                                </tr>
+                                                <tr id="subfolder-ED" class="collapse">
+                                                    <td class="ps-5">
+                                                        <i class="bi ms-4 me-2 bi-folder2-open"></i>ED-02
+                                                    </td>
+                                                </tr>  
+                                            </div>
+                                            <tr class="folder-row" data-bs-toggle="collapse" data-bs-target="#subfolder-XA">
+                                                <td><i class="bi ms-3 bi-caret-right-fill toggle-direction-icon"></i><i class="bi m-2 bi-folder2 toggle-folder-icon"></i>XA</td>
+                                            </tr>
+                                            <div class="d-flex flex-column">
+                                                <tr id="subfolder-XA" class="collapse">
+                                                    <td class="ps-5">
+                                                        <i class="bi ms-4 me-2 bi-folder2-open"></i>XA-01
+                                                    </td>
+                                                </tr>
+                                                <tr id="subfolder-XA" class="collapse">
+                                                    <td class="ps-5">
+                                                        <i class="bi ms-4 me-2 bi-folder2-open"></i>XA-02
+                                                    </td>
+                                                </tr>                                            
+                                            </div>
+                                        </tbody>
+                                    </table>
+                                </div>  
+                            </div>
+                            <div class="tab-pane fade" id="archive" role="tabpanel">
+                                <p>Đang phát triển.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="case-menu h-50">
+                    <div class="tab-list">
+                        <ul class="nav nav-tabs nav-fill" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active text-black" id="filter-tab" data-bs-toggle="tab" data-bs-target="#info" type="button" role="tab">
+                                    Thông tin ca
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link text-black" id="archive-tab" data-bs-toggle="tab" data-bs-target="#preview" type="button" role="tab">
+                                    Xem trước
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link text-black" id="archive-tab" data-bs-toggle="tab" data-bs-target="#history" type="button" role="tab">
+                                    Lịch sử
+                                </button>
+                            </li>
+                        </ul>   
+                    </div>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="info" role="tabpanel">
+                            <div class="py-3 px-3 patient-info">
+                                <strong>THÔNG TIN BỆNH NHÂN</strong>
+                                <div class="row">
+                                    <div class="col-md-5">PID:</div>
+                                    <div class="col-md-5">0535888656</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-5">Họ và tên:</div>
+                                    <div class="col-md-5">Nguyễn Thị Thảo</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-5">Năm sinh:</div>
+                                    <div class="col-md-5">1942</div>
+                                </div>
+                            </div>
+                            <div class="py-3 px-3 case-info">
+                                <strong>THÔNG TIN CA</strong>
+                                <div class="row">
+                                    <div class="col-md-5">Ngày chụp:</div>
+                                    <div class="col-md-5">22/11/2018 09:33</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-5">Bộ phận:</div>
+                                    <div class="col-md-5">HEAD</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-5">Ghi chú:</div>
+                                    <div class="col-md-5">CCM NAO CRMM</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-5">Máy chụp:</div>
+                                    <div class="col-md-5">CT204</div>
+                                </div>
+                            </div>
+                            <div class="py-3 px-3 diagnose-request">
+                                <strong>YÊU CẦU CHẨN ĐOÁN</strong>
+                                <div class="row">
+                                    <div class="col-md-5">Ưu tiên:</div>
+                                    <div class="col-md-5 text-danger">CC</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-5">CĐ lâm sàng:</div>
+                                    <div class="col-md-5">J18 - Viêm phổi, tác nhân không đặc hiệu</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-5">Bác sĩ chỉ định:</div>
+                                    <div class="col-md-5">Bs. Nguyễn Thị Cúc (Nội Tiết - Hô Hấp)</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-5">Chỉ định:</div>
+                                    <div class="col-md-5">A-Chụp CLVT tầng trên ổ bụng có khảo sát mạch các tạng [bao gồm mạch: gan, tụy, lách và mạch khối u] [từ 1-32 dãy]</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="preview" role="tabpanel">
+                            <p>Đang phát triển.</p>
+                        </div>
+                        <div class="tab-pane fade" id="history" role="tabpanel">
+                            <p>Đang phát triển.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-10 patient-show">
+                <div class="tab-list">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active text-black" id="filter-tab" data-bs-toggle="tab" data-bs-target="#caseList" type="button" role="tab">
+                                Danh sách ca
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link text-black" id="archive-tab" data-bs-toggle="tab" data-bs-target="#patient1" type="button" role="tab">
+                                Doan Hoang Giang
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link text-black" id="archive-tab" data-bs-toggle="tab" data-bs-target="#patient2" type="button" role="tab">
+                                Quynh Nguyen
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="caseList" role="tabpanel">
+                        <div class="case-table">
+                            <div class="filter ms-3 my-2">
+                                <div class="row">
+                                    <div class="col-md-2 px-3">
+                                        <label for="pid" class="form-label">Mã bệnh nhân</label>
+                                        <input type="text" class="form-control" id="pid">
+                                    </div>
+                                    <div class="col-md-2 px-3">
+                                        <label for="patientName" class="form-label">Tên bệnh nhân</label>
+                                        <input type="text" class="form-control" id="patientName" value="Doan Hoang Giang">
+                                    </div>
+                                    <div class="col-md-2 px-3">
+                                        <label for="patientState" class="form-label">Trạng thái</label>
+                                        <select class="form-select" id="patientState">
+                                            <option selected disabled value="">Tất cả</option>
+                                            <option value="Chưa đọc">Chưa đọc</option>
+                                            <option value="Đã duyệt">Đã duyệt</option>
+                                            <option value="Đã in">Đã in</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2 px-3">
+                                        <label for="captureDate" class="form-label">Mã bệnh nhân</label>
+                                        <input type="text" class="form-control" id="captureDate">
+                                    </div>
+                                    <div class="col-md-2 px-3">
+                                        <label for="patientResult" class="form-label">Kết quả đọc</label>
+                                        <input type="text" class="form-control" id="patientResult">
+                                    </div>
+                                    <div class="col-md-2 d-flex align-items-end">
+                                        <div class="col-md-5 mx-2 d-flex flex-column">
+                                            <button class="p-1 rounded border border-light refresh-btn"><i class="bi bi-arrow-clockwise"></i> Làm mới</button>
+                                        </div>
+                                        <div class="col-md-5 mx-2 d-flex flex-column">
+                                            <button class="bg-primary p-1 text-white rounded border border-light"><i class="bi bi-gear-fill"></i> Nâng cao</button>
+                                        </div>
+                                    </div> 
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-md-2 px-3">
+                                        <label for="patientBirthYear" class="form-label">Năm sinh</label>
+                                        <input type="number" class="form-control" id="patientBirthYear">
+                                    </div>
+                                    <div class="col-md-2 px-3">
+                                        <label for="patientGender" class="form-label">Giới tính</label>
+                                        <select class="form-select" id="patientGender">
+                                            <option selected value="Tất cả">Tất cả</option>
+                                            <option value="Nam">Nam</option>
+                                            <option value="Nữ">Nữ</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2 px-3">
+                                        <label for="patientCaptureType" class="form-label">Loại chụp</label>
+                                        <select class="form-select" id="patientCaptureType">
+                                            <option selected value="">Tất cả</option>
+                                            <option value="CT">CT</option>
+                                            <option value="MR">MR</option>
+                                            <option value="US">US</option>
+                                            <option value="ED">ED</option>
+                                            <option value="XA">XA</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2 px-3">
+                                        <label for="patientNote" class="form-label">Ghi chú</label>
+                                        <input type="text" class="form-control" id="patientNote">
+                                    </div>
+                                    <div class="col-md-2 px-3">
+                                        <label for="patentDiseaseCode" class="form-label">Mã bệnh</label>
+                                        <select class="form-select" id="patentDiseaseCode">
+                                            <option selected disabled value="">Chọn mã bệnh</option>
+                                            <option value="0">0</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="px-3 py-2 d-inline-flex page-manager">
+                                <button id="prevPage1" class="btn rounded page-btn"><strong><i class="bi bi-chevron-left"></i></strong></button>
+                                <button id="nextPage1" class="btn rounded page-btn"><strong><i class="bi bi-chevron-right"></i></strong></button>
+                                <div class="mx-4 d-flex align-items-center page-list">
+                                    Trang 
+                                    <select class="mx-2 page-select">
+                                        <option selected value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                    </select>
+                                </div>       
+                                <div class="mx-4 d-flex align-items-center case-show">
+                                    Hiển thị 
+                                    <select class="mx-2 page-select">
+                                        <option selected value="100">100</option>
+                                        <option value="150">150</option>
+                                        <option value="200">00</option>
+                                    </select>
+                                    ca
+                                </div>   
+                                <div class="mx-4 d-flex align-items-center case-total">Tổng số ca: <strong>430</strong></div>    
+                            </div>  
+
+                            <div class="case-list-container">
+                                <table class="table table-striped table-fixed case-list">
+                                    <thead>
+                                        <tr>
+                                            <th><input type="checkbox"></th>
+                                            <th>Trạng thái</th>
+                                            <th>Tên bệnh nhân</th>
+                                            <th>Mã bệnh nhân</th>
+                                            <th>Năm sinh</th>
+                                            <th>Giới tính</th>
+                                            <th>TT bổ sung</th>
+                                            <th>Ngày/Giờ chụp</th>
+                                            <th>Dịch vụ</th>
+                                            <th>Modality</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><input type="checkbox"></td>
+                                            <td>Chưa đọc</td>
+                                            <td>Nguyen Van Hinh</td>
+                                            <td>108432153</td>
+                                            <td>1989</td>
+                                            <td>Nam</td>
+                                            <td><i class="bi bi-envelope-fill"></i></td>
+                                            <td>01/01/2018</td>
+                                            <td>Chụp XQuang ngực</td>
+                                            <td>CT</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox"></td>
+                                            <td>Chưa đọc</td>
+                                            <td>Nguyen Van Hinh</td>
+                                            <td>108432153</td>
+                                            <td>1989</td>
+                                            <td>Nam</td>
+                                            <td><i class="bi bi-envelope-fill"></i></td>
+                                            <td>01/01/2018</td>
+                                            <td>Chụp XQuang ngực</td>
+                                            <td>CT</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox"></td>
+                                            <td>Đã in</td>
+                                            <td>Nguyen Van Hinh</td>
+                                            <td>108432153</td>
+                                            <td>1989</td>
+                                            <td>Nam</td>
+                                            <td><i class="bi bi-envelope-fill"></i></td>
+                                            <td>01/01/2018</td>
+                                            <td>Chụp XQuang ngực</td>
+                                            <td>CT</td>
+                                        </tr>
+                                        <tr class="table-primary">
+                                            <td><input type="checkbox"></td>
+                                            <td>Đã duyệt</td>
+                                            <td>Nguyen Cong Tu</td>
+                                            <td>108432153</td>
+                                            <td>1989</td>
+                                            <td>Nam</td>
+                                            <td><i class="bi bi-envelope-fill"></i></td>
+                                            <td>01/01/2018</td>
+                                            <td>Chụp XQuang ngực</td>
+                                            <td>XA</td>
+                                        </tr>
+                                        <tr class="table-success">
+                                            <td><input type="checkbox"></td>
+                                            <td>Chưa đọc</td>
+                                            <td>Nguyen Van Hinh</td>
+                                            <td>108432153</td>
+                                            <td>1989</td>
+                                            <td>Nam</td>
+                                            <td><i class="bi bi-envelope-fill"></i></td>
+                                            <td>01/01/2018</td>
+                                            <td>Chụp XQuang ngực</td>
+                                            <td>CT</td>
+                                        </tr>
+                                        <tr class="table-warning">
+                                            <td><input type="checkbox"></td>
+                                            <td>Đã duyệt</td>
+                                            <td>Nguyen Van Hinh</td>
+                                            <td>108432153</td>
+                                            <td>1989</td>
+                                            <td>Nam</td>
+                                            <td><i class="bi bi-envelope-fill"></i></td>
+                                            <td>01/01/2018</td>
+                                            <td>Chụp XQuang ngực</td>
+                                            <td>CT</td>
+                                        </tr>
+                                        <tr class="table-danger">
+                                            <td><input type="checkbox"></td>
+                                            <td>Chưa đọc</td>
+                                            <td>Nguyen Van Hinh</td>
+                                            <td>108432153</td>
+                                            <td>1989</td>
+                                            <td>Nam</td>
+                                            <td><i class="bi bi-envelope-fill"></i></td>
+                                            <td>01/01/2018</td>
+                                            <td>Chụp XQuang ngực</td>
+                                            <td>CT</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox"></td>
+                                            <td>Chưa đọc</td>
+                                            <td>Nguyen Van Hinh</td>
+                                            <td>108432153</td>
+                                            <td>1989</td>
+                                            <td>Nam</td>
+                                            <td><i class="bi bi-envelope-fill"></i></td>
+                                            <td>01/01/2018</td>
+                                            <td>Chụp XQuang ngực</td>
+                                            <td>CT</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox"></td>
+                                            <td>Chưa đọc</td>
+                                            <td>Nguyen Van Hinh</td>
+                                            <td>108432153</td>
+                                            <td>1989</td>
+                                            <td>Nam</td>
+                                            <td><i class="bi bi-envelope-fill"></i></td>
+                                            <td>01/01/2018</td>
+                                            <td>Chụp XQuang ngực</td>
+                                            <td>CT</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox"></td>
+                                            <td>Chưa đọc</td>
+                                            <td>Nguyen Van Hinh</td>
+                                            <td>108432153</td>
+                                            <td>1989</td>
+                                            <td>Nam</td>
+                                            <td><i class="bi bi-envelope-fill"></i></td>
+                                            <td>01/01/2018</td>
+                                            <td>Chụp XQuang ngực</td>
+                                            <td>CT</td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="checkbox"></td>
+                                            <td>Chưa đọc</td>
+                                            <td>Nguyen Van Hinh</td>
+                                            <td>108432153</td>
+                                            <td>1989</td>
+                                            <td>Nam</td>
+                                            <td><i class="bi bi-envelope-fill"></i></td>
+                                            <td>01/01/2018</td>
+                                            <td>Chụp XQuang ngực</td>
+                                            <td>CT</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="related-case">
+                                <div class="title ms-3 my-2"><strong>Ca liên quan</strong></div>
+                                <div class="related-case-table">
+                                    <table class="table table-striped table-fixed case-list">
+                                        <thead>
+                                            <tr>
+                                                <th><input type="checkbox"></th>
+                                                <th>Trạng thái</th>
+                                                <th>Tên bệnh nhân</th>
+                                                <th>Mã bệnh nhân</th>
+                                                <th>Năm sinh</th>
+                                                <th>Giới tính</th>
+                                                <th>TT bổ sung</th>
+                                                <th>Ngày/Giờ chụp</th>
+                                                <th>Dịch vụ</th>
+                                                <th>Modality</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><input type="checkbox"></td>
+                                                <td>Chưa đọc</td>
+                                                <td>Nguyen Van Hinh</td>
+                                                <td>108432153</td>
+                                                <td>1989</td>
+                                                <td>Nam</td>
+                                                <td><i class="bi bi-envelope-fill"></i></td>
+                                                <td>01/01/2018</td>
+                                                <td>Chụp XQuang ngực</td>
+                                                <td>CT</td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox"></td>
+                                                <td>Chưa đọc</td>
+                                                <td>Nguyen Van Hinh</td>
+                                                <td>108432153</td>
+                                                <td>1989</td>
+                                                <td>Nam</td>
+                                                <td><i class="bi bi-envelope-fill"></i></td>
+                                                <td>01/01/2018</td>
+                                                <td>Chụp XQuang ngực</td>
+                                                <td>CT</td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox"></td>
+                                                <td>Chưa đọc</td>
+                                                <td>Nguyen Van Hinh</td>
+                                                <td>108432153</td>
+                                                <td>1989</td>
+                                                <td>Nam</td>
+                                                <td><i class="bi bi-envelope-fill"></i></td>
+                                                <td>01/01/2018</td>
+                                                <td>Chụp XQuang ngực</td>
+                                                <td>CT</td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox"></td>
+                                                <td>Chưa đọc</td>
+                                                <td>Nguyen Van Hinh</td>
+                                                <td>108432153</td>
+                                                <td>1989</td>
+                                                <td>Nam</td>
+                                                <td><i class="bi bi-envelope-fill"></i></td>
+                                                <td>01/01/2018</td>
+                                                <td>Chụp XQuang ngực</td>
+                                                <td>CT</td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox"></td>
+                                                <td>Chưa đọc</td>
+                                                <td>Nguyen Van Hinh</td>
+                                                <td>108432153</td>
+                                                <td>1989</td>
+                                                <td>Nam</td>
+                                                <td><i class="bi bi-envelope-fill"></i></td>
+                                                <td>01/01/2018</td>
+                                                <td>Chụp XQuang ngực</td>
+                                                <td>CT</td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox"></td>
+                                                <td>Chưa đọc</td>
+                                                <td>Nguyen Van Hinh</td>
+                                                <td>108432153</td>
+                                                <td>1989</td>
+                                                <td>Nam</td>
+                                                <td><i class="bi bi-envelope-fill"></i></td>
+                                                <td>01/01/2018</td>
+                                                <td>Chụp XQuang ngực</td>
+                                                <td>CT</td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox"></td>
+                                                <td>Chưa đọc</td>
+                                                <td>Nguyen Van Hinh</td>
+                                                <td>108432153</td>
+                                                <td>1989</td>
+                                                <td>Nam</td>
+                                                <td><i class="bi bi-envelope-fill"></i></td>
+                                                <td>01/01/2018</td>
+                                                <td>Chụp XQuang ngực</td>
+                                                <td>CT</td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox"></td>
+                                                <td>Chưa đọc</td>
+                                                <td>Nguyen Van Hinh</td>
+                                                <td>108432153</td>
+                                                <td>1989</td>
+                                                <td>Nam</td>
+                                                <td><i class="bi bi-envelope-fill"></i></td>
+                                                <td>01/01/2018</td>
+                                                <td>Chụp XQuang ngực</td>
+                                                <td>CT</td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox"></td>
+                                                <td>Chưa đọc</td>
+                                                <td>Nguyen Van Hinh</td>
+                                                <td>108432153</td>
+                                                <td>1989</td>
+                                                <td>Nam</td>
+                                                <td><i class="bi bi-envelope-fill"></i></td>
+                                                <td>01/01/2018</td>
+                                                <td>Chụp XQuang ngực</td>
+                                                <td>CT</td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox"></td>
+                                                <td>Chưa đọc</td>
+                                                <td>Nguyen Van Hinh</td>
+                                                <td>108432153</td>
+                                                <td>1989</td>
+                                                <td>Nam</td>
+                                                <td><i class="bi bi-envelope-fill"></i></td>
+                                                <td>01/01/2018</td>
+                                                <td>Chụp XQuang ngực</td>
+                                                <td>CT</td>
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox"></td>
+                                                <td>Chưa đọc</td>
+                                                <td>Nguyen Van Hinh</td>
+                                                <td>108432153</td>
+                                                <td>1989</td>
+                                                <td>Nam</td>
+                                                <td><i class="bi bi-envelope-fill"></i></td>
+                                                <td>01/01/2018</td>
+                                                <td>Chụp XQuang ngực</td>
+                                                <td>CT</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="tool-bar mt-3 row">
+                                <div class="col-md-1 d-flex justify-content-center">
+                                    <button class="border-0 rounded px-4"><i class="bi bi-file-earmark-text-fill"></i></button>
+                                </div>
+                                <div class="col-md-2 d-flex justify-content-center">
+                                    <div class="col-md-4 d-flex justify-content-center">
+                                        <button class="border-0 rounded px-4"><i class="bi bi-eye-fill"></i></button>
+                                    </div>
+                                    <div class="col-md-4 d-flex justify-content-center">
+                                        <button class="border-0 rounded px-4"><i class="bi bi-camera-fill"></i></button>
+                                    </div>
+                                    <div class="col-md-4 d-flex justify-content-center">
+                                        <button class="border-0 rounded px-4"><i class="bi bi-link-45deg"></i></button>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 d-flex justify-content-center">
+                                    <div class="col-md-2 d-flex justify-content-center">
+                                        <button class="border-0 rounded px-4"><i class="bi bi-plus-lg"></i></button>
+                                    </div>
+                                    <div class="col-md-2 d-flex justify-content-center">
+                                        <button class="border-0 rounded px-4"><i class="bi bi-file-check-fill"></i></button>
+                                    </div>
+                                    <div class="col-md-2 d-flex justify-content-center">
+                                        <button class="border-0 rounded px-4"><i class="bi bi-floppy2-fill"></i></button>
+                                    </div>
+                                    <div class="col-md-2 d-flex justify-content-center">
+                                        <button class="border-0 rounded px-4"><i class="bi bi-pencil-fill"></i></button>
+                                    </div>
+                                    <div class="col-md-2 d-flex justify-content-center">
+                                        <button class="border-0 rounded px-4"><i class="bi bi-unlock-fill"></i></button>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 d-flex justify-content-center">
+                                    <div class="col-md-4 d-flex justify-content-center">
+                                        <button class="border-0 rounded px-4"><i class="bi bi-printer-fill"></i></button>
+                                    </div>
+                                    <div class="col-md-4 d-flex justify-content-center">
+                                        <button class="border-0 rounded px-4"><i class="bi bi-printer-fill"></i></button>
+                                    </div>
+                                    <div class="col-md-4 d-flex justify-content-center">
+                                        <button class="border-0 rounded px-4"><i class="bi bi-printer-fill"></i></button>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 d-flex justify-content-center">
+                                    <div class="col-md-4 d-flex justify-content-center">
+                                        <button class="border-0 rounded px-4"><i class="bi bi-box"></i></button>
+                                    </div>
+                                    <div class="col-md-4 d-flex justify-content-center">
+                                        <button class="border-0 rounded px-4"><i class="bi bi-arrow-left-right"></i></button>
+                                    </div>
+                                    <div class="col-md-4 d-flex justify-content-center">
+                                        <button class="border-0 rounded px-4"><i class="bi bi-chat-left-text-fill"></i></button>
+                                    </div>
+                                </div>
+                                <div class="col-md-1 d-flex justify-content-center">
+                                    <button class="border-0 rounded px-4"><i class="bi bi-chat-left-text-fill"></i></button>
+                                </div>
+                            </div>
+
+                            <div class="tool-bar-label mt-1 mb-3 row">
+                                <div class="col-md-1 d-flex justify-content-center">
+                                    <label class="text-center">Nhận ca</label>
+                                </div>
+                                <div class="col-md-2 d-flex justify-content-center">
+                                    <div class="col-md-4 d-flex justify-content-center">
+                                        <label class="text-center">Xem ảnh<br>Alt+V</label>
+                                    </div>
+                                    <div class="col-md-4 d-flex justify-content-center">
+                                        <label>Chụp ảnh</label>
+                                    </div>
+                                    <div class="col-md-4 d-flex justify-content-center">
+                                        <label>Link ảnh</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 d-flex justify-content-center">
+                                    <div class="col-md-2 d-flex justify-content-center">
+                                        <label class="text-center">Thêm CĐ<br>Alt+N</label>
+                                    </div>
+                                    <div class="col-md-2 d-flex justify-content-center">
+                                        <label class="text-center">Duyệt CĐ<br>Alt+N</label>
+                                    </div>
+                                    <div class="col-md-2 d-flex justify-content-center">
+                                        <label class="text-center">Lưu nháp<br>Alt+D</label>
+                                    </div>
+                                    <div class="col-md-2 d-flex justify-content-center">
+                                        <label class="text-center">Sửa CĐ<br>Alt+E</label>
+                                    </div>
+                                    <div class="col-md-2 d-flex justify-content-center">
+                                        <label class="text-center">Hủy khóa<br>Alt+C</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 d-flex justify-content-center">
+                                    <div class="col-md-4 d-flex justify-content-center">
+                                        <label class="text-center">In<br>Alt+P</label>
+                                    </div>
+                                    <div class="col-md-4 d-flex justify-content-center">
+                                        <label class="text-center">Duyệt và<br>In</label>
+                                    </div>
+                                    <div class="col-md-4 d-flex justify-content-center">
+                                        <label>In nhanh</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 d-flex justify-content-center">
+                                    <div class="col-md-4 d-flex justify-content-center">
+                                        <label class="text-center">Thêm vật tư<br>Alt+C</label>
+                                    </div>
+                                    <div class="col-md-4 d-flex justify-content-center">
+                                        <label class="text-center">Chuyển ca<br>Alt+C</label>
+                                    </div>
+                                    <div class="col-md-4 d-flex justify-content-center">
+                                        <label class="text-center">Ghi chú<br>Alt+C</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-1 d-flex justify-content-center">
+                                    <label class="text-center">Ghi chú<br>Alt+C</label>
+                                </div>
+                            </div>
+                        </div>   
+                    </div>
+                    <div class="tab-pane fade" id="patient1" role="tabpanel">
+                        <p>Đang phát triển.</p>
+                    </div>
+                    <div class="tab-pane fade" id="patient2" role="tabpanel">
+                        <p>Đang phát triển.</p>
+                    </div>
+                </div>
+
+                <div class="case-show">
+                    <div class="p-3 filter d-flex">
+                        <div class="col-md-5 mx-3 d-flex align-items-center">
+                            <div class="col-md-2">Chẩn đoán</div>
+                            <div class="col-md-8">
+                                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option selected disabled value="">Chọn chẩn đoán</option>
+                                    <option value="Lần 3 | Chẩn đoán mới | BS Nguyễn Hùng">Lần 3 | Chẩn đoán mới | BS Nguyễn Hùng</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mx-3 d-flex align-items-center">
+                            <div class="col-md-3">Dịch vụ</div>
+                            <div class="col-md-8">
+                                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option selected disabled value="">Chọn dịch vụ</option>
+                                    <option value="XA021">XA021 - XQuang chân</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mx-3 d-flex align-items-center">
+                            <div class="col-md-3">Mẫu KQ</div>
+                            <div class="col-md-8">
+                                <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option selected disabled value="">Chọn mẫu kết quả</option>
+                                    <option value="XA021">XA021 - XQuang chân</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box p-3 bg-white">
+                        <div class="note-box p-3">
+                            <div class="note">
+                                Kỹ thuật chụp: Chụp Xquang cột sống cổ thẳng nghiêng |<br>
+                                -- Không thấy gãy xẹp các đốt sống<br>
+                                -- Không thấy hẹp các khoảng liền đốt sống<br>
+                                -- Cấu trúc các đốt sống không thấy bất thường
+                                <div class="py-4">
+                                    Hiện tại không thấy hình ảnh bất thường xương cột sống cổ trên phim
+                                </div>
+                            </div>
+                        </div>
+                        <div class="note-box my-3 p-3">
+                            <div class="note d-flex">
+                                <div class="col-md-1 d-flex flex-column pe-3 choose-img">
+                                    <button class="my-2 rounded bg-white border border-light"><i class="bi bi-images"></i> Chọn ảnh</button>
+                                </div>
+                                <div class="col-md-8">
+                                    <img class="demo-img ms-3" src="..\assets\img\image-1.png" alt="">
+                                    <img class="demo-img ms-3" src="..\assets\img\image-2.png" alt="">
+                                    <img class="demo-img ms-3" src="..\assets\img\image-3.png" alt="">
+                                    <img class="demo-img ms-3" src="..\assets\img\image-4.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="note-box p-3 d-flex">
+                            <div class="col-md-1 d-flex flex-column pe-3 choose-img">
+                                <button type="button" class="btn btn-primary border border-light"><i class="bi bi-camera-fill"></i> Chụp ảnh</button>
+                                <button class="my-2 rounded bg-white border border-light"><i class="bi bi-cloud-arrow-up-fill"></i> Tải lên</button>
+                                <button class="rounded bg-white border border-light"><i class="bi bi-gear-fill"></i> Cấu hình</button>
+                            </div>
+                            <div class="col-md-8">
+                                <img class="demo-img ms-3" src="..\assets\img\image.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="case-info">
+                        <div class="row m-3">
+                            <div class="col-md-3 d-flex align-items-center px-3">
+                                <div class="col-md-6 me-2 text-end">Người ký</div>
+                                <div class="col-md-6">
+                                    <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                        <option selected disabled value="">Chọn người ký</option>
+                                        <option value="BS Phạm Tuấn Tú">BS Phạm Tuấn Tú</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3 d-flex align-items-center px-3">
+                                <div class="col-md-6 me-2 text-end">Mã bệnh ID</div>
+                                <div class="col-md-6">
+                                    <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                        <option selected disabled value="">Chọn mã bệnh</option>
+                                        <option value="A1234">A1234</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3 d-flex align-items-center px-3">
+                                <div class="col-md-6 me-2 text-end">Thẻ tag</div>
+                                <div class="col-md-6">
+                                    <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                        <option selected disabled value="">Chọn thẻ tag</option>
+                                        <option value="Tag name">Tag name</option>
+                                        <option value="2">Two</option>
+                                        <option value="3">Three</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3 d-flex align-items-center px-3">
+                                <div class="col-md-6 me-2 text-end">Người chụp</div>
+                                <div class="col-md-6">
+                                    <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                        <option selected disabled value="">Chọn người chụp</option>
+                                        <option value="BS Phạm Tuấn Tú">BS Phạm Tuấn Tú</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row m-3">
+                            <div class="col-md-3 d-flex align-items-center px-3">
+                                <div class="col-md-6 me-2 text-end">Y tá</div>
+                                <div class="col-md-6">
+                                    <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                        <option selected disabled value="">Chọn y tá</option>
+                                        <option value="Lê Minh Thùy">Lê Minh Thùy</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3 d-flex align-items-center px-3">
+                                <div class="col-md-6 me-2 text-end">Chẩn đoán trước</div>
+                                <div class="col-md-6">
+                                    <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                        <option selected value="Có">Có</option>
+                                        <option value="Không">Không</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3 d-flex align-items-center px-3">
+                                <div class="col-md-6 me-2 text-end">Thẻ tag</div>
+                                <div class="col-md-6">
+                                    <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                        <option selected disabled value="">Chọn giải phẫu</option>
+                                        <option value="A1234">A1234</option>
+                                    </select>
+                                </div>
+                            </div>                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </div>
+    <script src="../assets/js/list_upload.js"></script>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

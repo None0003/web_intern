@@ -1,0 +1,16 @@
+body {
+    /* font-family: 'Poppins'; */
+    font-size: 22px;
+}
+
+.box {
+    min-height: 90vh;
+    border-radius: 1em;
+    background-color: #99eaf0;
+}
+
+.avatar {
+    object-fit: cover; 
+    width: 250px; 
+    height: 250px;
+}
