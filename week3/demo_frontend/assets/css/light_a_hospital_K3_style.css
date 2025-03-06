@@ -25,6 +25,10 @@ header {
     border-right: 1px solid #B2B2B2;
     background-color: #DBDBDB;
     .work-tree {
+        .tab-list {
+            height: 100%;
+            overflow-y: auto; 
+        }
         .work-tree-title {
             background-color: #DBDBDB;
             border-top: 1px solid #B2B2B2;
