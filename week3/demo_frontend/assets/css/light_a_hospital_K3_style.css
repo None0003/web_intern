@@ -114,4 +114,31 @@ body {
         max-width: 200px;
     }
 }
-    
+
+.select2-container--default .select2-selection--multiple {
+    position: relative;
+    padding-right: 30px; 
+}
+
+.select2-container--default .select2-selection--multiple::after {
+    content: "\F282";
+    font-family: "bootstrap-icons";
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #333;
+    pointer-events: none; 
+}
+
+.select2-container--default .select2-selection__choice {
+    display: flex;
+    align-items: center;
+    padding-right: 10px; 
+}
+
+.select2-container--default .select2-selection__choice__remove {
+    margin-left: 5px; 
+    order: 2; 
+}
