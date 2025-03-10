@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    
+    <!-- Select2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+
+    <!-- jQuery & Select2 JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+
     <link href='../assets/css/light_a_hospital_K3_style.css' rel='stylesheet'>
     <title>Document</title>
 </head>
@@ -877,8 +885,7 @@
                             <div class="col-md-3 d-flex align-items-center px-3">
                                 <div class="col-md-6 me-2 text-end">Người ký</div>
                                 <div class="col-md-6">
-                                    <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                                        <option selected disabled value="">Chọn người ký</option>
+                                    <select class="form-select form-select-sm selectSigner" multiple>
                                         <option value="BS Phạm Tuấn Tú">BS Phạm Tuấn Tú</option>
                                     </select>
                                 </div>
@@ -895,19 +902,15 @@
                             <div class="col-md-3 d-flex align-items-center px-3">
                                 <div class="col-md-6 me-2 text-end">Thẻ tag</div>
                                 <div class="col-md-6">
-                                    <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                                        <option selected disabled value="">Chọn thẻ tag</option>
+                                    <select class="form-select form-select-sm selectTag" multiple>
                                         <option value="Tag name">Tag name</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-3 d-flex align-items-center px-3">
                                 <div class="col-md-6 me-2 text-end">Người chụp</div>
                                 <div class="col-md-6">
-                                    <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                                        <option selected disabled value="">Chọn người chụp</option>
+                                    <select class="form-select form-select-sm selectTaker" multiple>
                                         <option value="BS Phạm Tuấn Tú">BS Phạm Tuấn Tú</option>
                                     </select>
                                 </div>
@@ -917,8 +920,7 @@
                             <div class="col-md-3 d-flex align-items-center px-3">
                                 <div class="col-md-6 me-2 text-end">Y tá</div>
                                 <div class="col-md-6">
-                                    <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                                        <option selected disabled value="">Chọn y tá</option>
+                                    <select class="form-select form-select-sm selectNurse" multiple>
                                         <option value="Lê Minh Thùy">Lê Minh Thùy</option>
                                     </select>
                                 </div>
@@ -933,7 +935,7 @@
                                 </div>
                             </div>
                             <div class="col-md-3 d-flex align-items-center px-3">
-                                <div class="col-md-6 me-2 text-end">Thẻ tag</div>
+                                <div class="col-md-6 me-2 text-end">Giải phẫu</div>
                                 <div class="col-md-6">
                                     <select class="form-select form-select-sm" aria-label=".form-select-sm example">
                                         <option selected disabled value="">Chọn giải phẫu</option>
@@ -947,7 +949,7 @@
             </div>
         </div> 
     </div>
-    <script src="../assets/js/list_upload.js"></script>
+    <script src="../assets/js/light_a_hospital_K3.js"></script>
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
