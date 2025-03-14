@@ -3,6 +3,7 @@ namespace App\Controllers;
 
 use App\Models\Employee;
 use App\Models\Department;
+use App\Models\Assignment;
 use Illuminate\Database\Capsule\Manager as DB;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -38,6 +39,12 @@ class EmployeeController
             'email' => $body['email'],
             'dia_chi' => $body['address'],
             'avatar' => $avatarPath
+        ]);
+
+        $assignment = Assignment::create([
+            'id_phong_ban' => $body['department'],
+            'id_nhan_vien' => $employee->id_nhan_vien,
+            'chuc_vu' => $body['position']
         ]);
     
         $response->getBody()->write(json_encode($employee));
