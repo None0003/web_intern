@@ -3,6 +3,10 @@
 declare(strict_types=1);
 
 use App\Models\Employee;
+use App\Models\Department;
+use App\Models\Assignment;
+use App\Controllers\EmployeeController;
+use App\Controllers\AssignmentController;
 use App\Application\Actions\User\ListUsersAction;
 use App\Application\Actions\User\ViewUserAction;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -21,39 +25,37 @@ return function (App $app) {
         return $response;
     });
 
-    $app->post('/add-employees', function ($request, $response) {
-        $directory = __DIR__ . '/../assets/img';
+    $app->post('/add-employees', [EmployeeController::class, 'addEmployee']);
 
-        if (!is_dir($directory)) {
-            mkdir($directory, 0777, true); // Tạo thư mục với quyền ghi
-        }
-
-        $uploadedFiles = $request->getUploadedFiles();
-        $avatarPath = null;
-
-        if (!empty($uploadedFiles['avatar'])) {
-            $uploadedFile = $uploadedFiles['avatar'];
-            if ($uploadedFile->getError() === UPLOAD_ERR_OK) {
-                $filename = uniqid() . "-" . $uploadedFile->getClientFilename();
-                $uploadedFile->moveTo($directory . DIRECTORY_SEPARATOR . $filename);
-                $avatarPath = '../assets/img/' . $filename;
+    $app->get('/query', function ($request, $response) {
+        try {
+            $queryParams = $request->getQueryParams();
+            $type = isset($queryParams['type']) ? (int)$queryParams['type'] : 0;
+    
+            switch ($type) {
+                case 1:
+                    return (new AssignmentController())->getAssignment($request, $response);
+                
+                case 2:
+                    break;
+    
+                case 3:
+                    break;
+    
+                default:
+                    $data = ['error' => 'Type không hợp lệ'];
+                    break;
             }
+    
+            // Trả về JSON response
+            $response->getBody()->write(json_encode($data));
+            return $response->withHeader('Content-Type', 'application/json');
+        } catch (Exception $e) {
+            // Bắt lỗi và trả về thông báo lỗi
+            $error = ['error' => $e->getMessage()];
+            $response->getBody()->write(json_encode($error));
+            return $response->withHeader('Content-Type', 'application/json')->withStatus(500);
         }
-
-        $body = $request->getParsedBody();
-    
-        $employee = Employee::create([
-            'ho_ten' => $body['name'],
-            'ngay_sinh' => $body['dateOfBirth'],
-            'gioi_tinh' => $body['gender'],
-            'so_dien_thoai' => $body['phoneNumber'],
-            'email' => $body['email'],
-            'dia_chi' => $body['address'],
-            'avatar' => $avatarPath
-        ]);
-    
-        $response->getBody()->write(json_encode($employee));
-        return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
     });
 
     $app->group('/users', function (Group $group) {
