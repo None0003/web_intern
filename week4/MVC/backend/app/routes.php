@@ -7,6 +7,7 @@ use App\Models\Department;
 use App\Models\Assignment;
 use App\Controllers\EmployeeController;
 use App\Controllers\AssignmentController;
+use App\Controllers\SalaryController;
 use App\Application\Actions\User\ListUsersAction;
 use App\Application\Actions\User\ViewUserAction;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -37,10 +38,10 @@ return function (App $app) {
                     return (new AssignmentController())->getAssignment($request, $response);
                 
                 case 2:
-                    break;
+                    return (new SalaryController())->getTotalMonthSalary($request, $response);
     
                 case 3:
-                    break;
+                    return (new AssignmentController())->getDepartmentWithEmployee($request, $response);
     
                 default:
                     $data = ['error' => 'Type không hợp lệ'];

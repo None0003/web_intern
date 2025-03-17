@@ -29,12 +29,17 @@
                         <strong>Truy vấn dữ liệu</strong>
                     </div>
                     <form class="query-select m-4 d-flex flex-column justify-content-center" id="queryForm">
-                        <select class="form-select" id="type" aria-label="Default select example" required>
+                        <select class="form-select" id="type" required onchange="toggleMonthSelect()">
                             <option selected disabled value="">Chọn truy vấn</option>
                             <option value="1">Nhân viên và phòng ban nhân viên</option>
                             <option value="2">Tính tổng lương nhân viên trong 1 tháng</option>
                             <option value="3">Lấy danh sách nhân viên trong mỗi phòng ban</option>
                         </select>
+
+                        <div id="monthSelectContainer" class="d-none mt-3 d-flex">
+                            <input type="month" class="form-control" id="month">
+                        </div>
+
                         <button type="submit" class="btn btn-success mt-4">Truy vấn</button>
                     </form>
                 </div>
@@ -58,22 +63,44 @@
 </body>
 
 <script>
-    document.getElementById("queryForm").addEventListener("submit", function(event) {
-        event.preventDefault(); // Ngăn tải lại trang
+    function toggleMonthSelect() {
+        let typeSelect = document.getElementById("type");
+        let monthSelectContainer = document.getElementById("monthSelectContainer");
+        if (typeSelect.value === "2") {
+            monthSelectContainer.classList.remove("d-none");
+            monthSelectContainer.classList.add("d-block");
+        } else {
+            monthSelectContainer.classList.add("d-none"); 
+            monthSelectContainer.classList.remove("d-block");
+        }
+    }
 
-        let type = Number(document.getElementById("type").value); // Lấy giá trị type từ form
-        fetchEmployeesData(type); // Gọi API với type đã chọn
+    document.getElementById("queryForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+        let type = Number(document.getElementById("type").value);
+        month = null;
+
+        if (type == "2") {
+            month = document.getElementById("month").value;
+        }
+
+        fetchEmployeesData(type, month);
     });
 
-    async function fetchEmployeesData(type) {
+    async function fetchEmployeesData(type, month) {
         let url = `http://localhost:8000/query?type=${type}`;
+
+        if (month) {
+            url += `&month=${month}`;
+        }
+
         try {
             let response = await fetch(url);
             let data = await response.json();
             let resultDiv = document.querySelector(".result");
-            resultDiv.innerHTML = ""; // Xóa nội dung cũ
+            resultDiv.innerHTML = "";
 
-            if (response.ok && data && Array.isArray(data)) {
+            if (response.ok && data) {
                 let table = `<table class="table table-bordered">
                     <thead><tr>`;
 
@@ -91,25 +118,43 @@
                         break;
 
                     case 2:
-                        table += "<th>Mã nhân viên</th><th>Tên nhân viên</th><th>Tổng lương</th></tr></thead><tbody>";
-                        data.forEach((item) => {
+                        table += "<th>Tháng nhận lương</th><th>Tổng lương</th></tr></thead><tbody>";
+                        if (data && typeof data === "object" && data.thang_nhan_luong) {  
                             table += `<tr>
-                                <td>${item.id_nhan_vien ?? "N/A"}</td>
-                                <td>${item.ho_ten ?? "N/A"}</td>
-                                <td>${item.tong_luong ?? "N/A"}</td>
+                                <td>${data.thang_nhan_luong}</td>
+                                <td>${Number(data.tong_luong).toLocaleString()} VND</td>
                             </tr>`;
-                        });
+                        } else {
+                            console.warn("⚠ Không có dữ liệu hợp lệ!", data);
+                            table += `<tr><td colspan="2">Không có dữ liệu</td></tr>`;
+                        }
                         break;
 
                     case 3:
+                        let groupedData = {};
+                        data.forEach(item => {
+                            let idPhongBan = item.id_phong_ban;
+                            
+                            if (!groupedData[idPhongBan]) {
+                                groupedData[idPhongBan] = {
+                                    id_phong_ban: item.id_phong_ban,
+                                    ten_phong_ban: item.ten_phong_ban,
+                                    nhan_vien: [] 
+                                };
+                            }
+                            if (item.nhan_vien) {
+                                groupedData[idPhongBan].nhan_vien.push(item.nhan_vien.ho_ten);
+                            }
+                        });
+
                         table += "<th>Mã phòng ban</th><th>Tên phòng ban</th><th>Danh sách nhân viên</th></tr></thead><tbody>";
-                        data.forEach((item) => {
-                            let danhSachNhanVien = item.nhan_vien?.map(nv => nv.ho_ten).join(", ") || "Không có nhân viên";
+                        Object.values(groupedData).forEach(item => {
+                            let danhSachNhanVien = item.nhan_vien.length ? item.nhan_vien.join(", ") : "Không có nhân viên";
                             table += `<tr>
-                                <td>${item.id_phong_ban ?? "N/A"}</td>
-                                <td>${item.ten_phong_ban ?? "N/A"}</td>
-                                <td>${danhSachNhanVien}</td>
-                            </tr>`;
+                                        <td>${item.id_phong_ban ?? "N/A"}</td>
+                                        <td>${item.ten_phong_ban ?? "N/A"}</td>
+                                        <td>${danhSachNhanVien}</td>
+                                    </tr>`;
                         });
                         break;
 
