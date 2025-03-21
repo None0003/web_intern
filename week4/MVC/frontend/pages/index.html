@@ -55,14 +55,45 @@
                     <td>${item.avatar ?? "Không có"}</td>
                     <td class='d-flex justify-content-center'>
                         <button class="btn btn-warning px-4">Sửa</button>
-                        <button class="btn btn-danger px-4 ms-3">Xóa</button>
+                        <button class="btn btn-danger px-4 ms-3 btn-delete" data-id="${item.id_nhan_vien}">Xóa</button>
                     </td>
                 </tr>`;
             });
             table += "</tbody></table>";
             resultDiv.innerHTML = table;
+
+            document.querySelectorAll(".btn-delete").forEach((btn) => {
+                btn.addEventListener("click", async function () {
+                    let id = this.getAttribute("data-id");
+                    if (confirm("Bạn có chắc muốn xóa nhân viên này?")) {
+                        await deleteEmployee(id);
+                    }
+                });
+            });
+        }     
+    }
+
+    async function deleteEmployee(id) {
+        console.log(id);
+        try {
+            let response = await fetch(`http://localhost:8000/delete-employee/${id}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+
+            let result = await response.json();
+            if (response.ok) {
+                alert("Xóa thành công!");
+                fetchEmployeesData();
+            } else {
+                alert(`Lỗi: ${result.error}`);
+            }
+        } catch (error) {
+            console.error("Lỗi khi xóa:", error);
+            alert("Có lỗi xảy ra!");
         }
-            
     }
 
     fetchEmployeesData();

@@ -104,12 +104,12 @@
             })
             .then(response => response.json())
             .then(data => {
-                if (data["statusCode"] == 200) {
-                    resultDiv.classList.remove("d-none");
-                    resultDiv.innerHTML = `<div class="alert alert-success text-center">Thêm nhân viên thành công!</div>`;
-                } else {
+                if (data["statusCode"] == 500) {
                     resultDiv.classList.remove("d-none");
                     resultDiv.innerHTML = `<div class="alert alert-danger text-center">Đã xảy ra lỗi khi thêm nhân viên</div>`;
+                } else {
+                    resultDiv.classList.remove("d-none");
+                    resultDiv.innerHTML = `<div class="alert alert-success text-center">Thêm nhân viên thành công!</div>`;
                 }
             })
         });

@@ -70,4 +70,30 @@ class EmployeeController
         $response->getBody()->write(json_encode($data));
         return $response->withHeader('Content-Type', 'application/json')->withStatus(200);
     }
+
+    public function destroy($request, $response, $args) {
+        try {
+            $id = $request->getAttribute('id');
+            $employee = Employee::find($id);
+    
+            if (!$employee) {
+                $error = ['error' => 'Nhân viên không tồn tại'];
+                return $this->jsonResponse($response, $error, 404);
+            }
+    
+            $employee->delete();
+    
+            $message = ['message' => 'Xóa nhân viên thành công'];
+            return $this->jsonResponse($response, $message, 200);
+        } catch (\Exception $e) {
+            $error = ['error' => 'Lỗi khi xóa nhân viên: ' . $e->getMessage()];
+            return $this->jsonResponse($response, $error, 500);
+        }
+    }  
+    
+    private function jsonResponse($response, $data, $statusCode) {
+        $response->getBody()->write(json_encode($data));
+        return $response->withHeader('Content-Type', 'application/json')->withStatus($statusCode);
+    }
+    
 }

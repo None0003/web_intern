@@ -47,12 +47,12 @@
         </div>
         <div class="col-md-1"></div>
         <div class="col-md-7 ms-5 d-flex justify-content-center align-items-center h-100">
-            <div class="p-1 w-100 h-75 rounded bg-white border border-success">
+            <div class="p-1 w-100 h-75 bg-white">
                 <div class="bg-white h-75 rounded">
-                    <div class="title text-center my-4 h5">
-                        <strong>Kết quả truy vấn</strong>
+                    <div class="result-title text-center my-4 h5">
+                        <!-- <strong>Kết quả truy vấn</strong> -->
                     </div>
-                    <div class="border border-success rounded h-100 m-4 result"></div>
+                    <div class="h-100 m-4 result"></div>
                 </div>
             </div>
         </div>
@@ -97,8 +97,10 @@
         try {
             let response = await fetch(url);
             let data = await response.json();
+            let resultTitleDiv = document.querySelector(".result-title");
             let resultDiv = document.querySelector(".result");
             resultDiv.innerHTML = "";
+            resultTitleDiv.innerHTML = `<div class="title text-center my-4 h5"><strong>Kết quả truy vấn</strong></div>`;
 
             if (response.ok && data) {
                 let table = `<table class="table table-bordered">
