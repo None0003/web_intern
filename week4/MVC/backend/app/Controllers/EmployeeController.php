@@ -50,4 +50,24 @@ class EmployeeController
         $response->getBody()->write(json_encode($employee));
         return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
     }
+
+    public function getEmployeeList($request, $response) {
+        $employee = Employee::all();
+
+        $data = $employee->map(function ($employee) {
+            return [
+                'id_nhan_vien' => $employee->id_nhan_vien,
+                'ho_ten' => $employee->ho_ten,
+                'ngay_sinh' => $employee->ngay_sinh,
+                'gioi_tinh' => $employee->gioi_tinh,
+                'so_dien_thoai' => $employee->so_dien_thoai,
+                'email' => $employee->email,
+                'dia_chi' => $employee->dia_chi,
+                'avatar' => $employee->avatar
+            ];
+        });
+    
+        $response->getBody()->write(json_encode($data));
+        return $response->withHeader('Content-Type', 'application/json')->withStatus(200);
+    }
 }

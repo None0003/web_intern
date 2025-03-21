@@ -59,6 +59,10 @@ return function (App $app) {
         }
     });
 
+    $app->get('/employee-list', function ($request, $response) {
+        return (new EmployeeController())->getEmployeeList($request, $response);
+    });
+
     $app->group('/users', function (Group $group) {
         $group->get('', ListUsersAction::class);
         $group->get('/{id}', ViewUserAction::class);
