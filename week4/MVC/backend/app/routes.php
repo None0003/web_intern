@@ -63,7 +63,9 @@ return function (App $app) {
         return (new EmployeeController())->getEmployeeList($request,$response);
     });
 
+    $app->get('/get-employee/{id}', EmployeeController::class . ':getEmployeeById');
     $app->delete('/delete-employee/{id}', EmployeeController::class . ':destroy');
+    $app->put('/update-employee/{id}', [EmployeeController::class, 'updateEmployee']);
 
     $app->group('/users', function (Group $group) {
         $group->get('', ListUsersAction::class);

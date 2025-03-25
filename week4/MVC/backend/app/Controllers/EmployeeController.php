@@ -2,11 +2,11 @@
 namespace App\Controllers;
 
 use App\Models\Employee;
-use App\Models\Department;
+// use App\Models\Department;
 use App\Models\Assignment;
-use Illuminate\Database\Capsule\Manager as DB;
-use Psr\Http\Message\ResponseInterface as Response;
-use Psr\Http\Message\ServerRequestInterface as Request;
+// use Illuminate\Database\Capsule\Manager as DB;
+// use Psr\Http\Message\ResponseInterface as Response;
+// use Psr\Http\Message\ServerRequestInterface as Request;
 
 class EmployeeController
 {
@@ -51,6 +51,32 @@ class EmployeeController
         return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
     }
 
+    public function getEmployeeById($request, $response, array $args) {
+        try {
+            $id = $args['id'];
+    
+            // Lấy thông tin nhân viên và join với bảng phân công
+            $employee = Employee::leftJoin('nhan_vien_phong_ban', 'nhan_vien.id_nhan_vien', '=', 'nhan_vien_phong_ban.id_nhan_vien')
+                ->select('nhan_vien.*', 'nhan_vien_phong_ban.id_phong_ban', 'nhan_vien_phong_ban.chuc_vu')
+                ->where('nhan_vien.id_nhan_vien', $id)
+                ->first();
+    
+            if (!$employee) {
+                $error = ['error' => 'Nhân viên không tồn tại'];
+                $response->getBody()->write(json_encode($error));
+                return $response->withHeader('Content-Type', 'application/json')->withStatus(404);
+            }
+    
+            $response->getBody()->write(json_encode($employee));
+            return $response->withHeader('Content-Type', 'application/json')->withStatus(200);
+        } catch (\Exception $e) {
+            $error = ['error' => 'Lỗi server: ' . $e->getMessage()];
+            $response->getBody()->write(json_encode($error));
+            return $response->withHeader('Content-Type', 'application/json')->withStatus(500);
+        }
+    }
+    
+
     public function getEmployeeList($request, $response) {
         $employee = Employee::all();
 
@@ -69,6 +95,40 @@ class EmployeeController
     
         $response->getBody()->write(json_encode($data));
         return $response->withHeader('Content-Type', 'application/json')->withStatus(200);
+    }
+
+    public function updateEmployee($request, $response, array $args) {
+        try {
+            $id = $args['id'];
+            $data = $request->getParsedBody();
+
+            $employee = Employee::find($id);
+            $assignment = Assignment::where('id_nhan_vien', $id)->first();
+
+            if (!$employee) {
+                return $response->withJson(['error' => 'Nhân viên không tồn tại'], 404);
+            }
+
+            $employee->ho_ten = $data['name'] ?? $employee->ho_ten;
+            $employee->ngay_sinh = $data['dateOfBirth'] ?? $employee->ngay_sinh;
+            $employee->gioi_tinh = $data['gender'] ?? $employee->gioi_tinh;
+            $employee->so_dien_thoai = $data['phoneNumber'] ?? $employee->so_dien_thoai;
+            $employee->email = $data['email'] ?? $employee->email;
+            $employee->dia_chi = $data['address'] ?? $employee->dia_chi;
+            $employee->save();
+
+            $assignment->id_phong_ban = $data['id_phong_ban'] ?? $assignment->id_phong_ban;
+            $assignment->id_nhan_vien = $data['id_nhan_vien'] ?? $assignment->id_nhan_vien;
+            $assignment->chuc_vu = $data['chuc_vu'] ?? $assignment->chuc_vu;
+            $assignment->save();
+
+            $response->getBody()->write(json_encode(['message' => 'Cập nhật thành công']));
+            return $response->withHeader('Content-Type', 'application/json')->withStatus(200);
+        } catch (\Exception $e) {
+            $error = ['error' => 'Lỗi server: ' . $e->getMessage()];
+            $response->getBody()->write(json_encode($error));
+            return $response->withHeader('Content-Type', 'application/json')->withStatus(500);
+        }
     }
 
     public function destroy($request, $response, $args) {

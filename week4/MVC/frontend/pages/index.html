@@ -54,7 +54,9 @@
                     <td>${item.dia_chi ?? "N/A"}</td>
                     <td>${item.avatar ?? "Không có"}</td>
                     <td class='d-flex justify-content-center'>
-                        <button class="btn btn-warning px-4">Sửa</button>
+                        <button class="btn btn-warning px-4 btn-update" data-id="${item.id_nhan_vien}">
+                            <a href="./update-employee.html?id=${item.id_nhan_vien}" class="text-decoration-none text-white">Sửa</a>
+                        </button>
                         <button class="btn btn-danger px-4 ms-3 btn-delete" data-id="${item.id_nhan_vien}">Xóa</button>
                     </td>
                 </tr>`;
